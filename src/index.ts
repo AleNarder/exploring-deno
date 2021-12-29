@@ -17,10 +17,10 @@ const main = wasmInstance.exports.main as CallableFunction;
 addEventListener("fetch", (event) => {
   // @ts-expect-error ts(2339)
   event.respondWith(
-    new Response(main().toString(), {
+    new Response(`<h1>main().toString()</h1>`, {
       status: 200,
       headers: {
-        "content-type": "text/plain",
+        "content-type": "text/html",
       },
     }),
   );
