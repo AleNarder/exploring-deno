@@ -14,4 +14,14 @@ const wasmInstance = new WebAssembly.Instance(wasmModule);
 
 const main = wasmInstance.exports.main as CallableFunction;
 
-console.log(main().toString());
+addEventListener("fetch", (event) => {
+  // @ts-expect-error ts(2339)
+  event.respondWith(
+    new Response(main().toString(), {
+      status: 200,
+      headers: {
+        "content-type": "text/plain",
+      },
+    }),
+  );
+});
